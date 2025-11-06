@@ -1,16 +1,24 @@
+using System.Collections;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameObject[] tetrominoPrefabs;
+    [SerializeField] private Transform spawnPoint;
+
+    private GameObject currentPiece;
+    private bool canSpawn = true;
+
+    private void Start()
     {
-        
+        SpawnNextTetromino();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnNextTetromino()
     {
-        
+        if (!canSpawn) return;
+
+        int randomIndex = Random.Range(0, tetrominoPrefabs.Length);
+        currentPiece = Instantiate(tetrominoPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
     }
 }
